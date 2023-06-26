@@ -1,46 +1,57 @@
 package com.sparta.newposet.entity;
 
 import com.sparta.newposet.dto.PostRequestDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
-@Table(name = "Post")
+@Table(name = "post")
 @NoArgsConstructor
-public class Post extends Timestamped{
+public class Post extends BaseEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
-    private String contents;
-    private Double password;
+
     private String title;
 
-    public Post(PostRequestDto requestDto) {
-        this.username = requestDto.getUsername();
-        this.contents = requestDto.getContents();
-        this.title = requestDto.getTitle();
-        this.password = requestDto.getPassword();
+    @Column(nullable = false)
+    private String name;
 
+    @Column(nullable = false, length = 500)
+    private String content;
+
+    @Column(nullable = false)
+    private String password;
+
+    public Post(PostRequestDto postRequestDto) {
+        this.title = postRequestDto.getTitle();
+        this.name = postRequestDto.getName();
+        this.content = postRequestDto.getContent();
+        this.password = postRequestDto.getPassword();
     }
 
-    public void update(PostRequestDto requestDto ) {
-        this.username = requestDto.getUsername();
-        this.title = requestDto.getTitle();
-        this.contents = requestDto.getContents();
-
+    // Setter
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Long getId() {
-        return id;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    // 서비스 함수
+
+    // 비밀번호 체크하는 함수
+    public void checkPassword(String inputPassword) {
+        if (!password.equals(inputPassword)) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
     }
 }
