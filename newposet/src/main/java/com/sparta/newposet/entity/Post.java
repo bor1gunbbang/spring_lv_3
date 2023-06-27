@@ -18,7 +18,7 @@ public class Post extends BaseEntity {
     private String title;
 
     @Column(nullable = false)
-    private String username;
+    private String name;
 
     @Column(nullable = false, length = 500)
     private String content;
@@ -28,7 +28,7 @@ public class Post extends BaseEntity {
 
     public Post(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
-        this.username = postRequestDto.getUsername();
+        this.name = postRequestDto.getName();
         this.content = postRequestDto.getContent();
         this.password = postRequestDto.getPassword();
     }
@@ -39,7 +39,7 @@ public class Post extends BaseEntity {
     }
 
     public void setName(String name) {
-        this.username = name;
+        this.name = name;
     }
 
     public void setContent(String content) {
