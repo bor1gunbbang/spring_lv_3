@@ -13,18 +13,18 @@ import org.hibernate.validator.constraints.Currency;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "users")
+@Table(name = "post")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "username",nullable = false, unique = true)
     @Size(min=4 ,max=10)
     @Pattern(regexp = "[a-z0-9]")
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "password",nullable = false)
     @Size(min=4 ,max=10)
     @Pattern(regexp = "[a-zA-Z0-9]")
     private String password;
