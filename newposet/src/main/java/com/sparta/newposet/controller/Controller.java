@@ -34,7 +34,7 @@ public class Controller {
     }
 
     @PostMapping("/posts")
-    public PostResponseDto createPost(@RequestHeader("Authorization") String token, @RequestBody PostRequestDto postRequestDto){
+    public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto){
         return postService.createPost(postRequestDto);
     }
     @PutMapping("/posts/{id}")
