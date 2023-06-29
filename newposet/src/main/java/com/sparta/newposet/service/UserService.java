@@ -50,20 +50,4 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void login(LoginRequestDto requestDto, HttpServletResponse res) {
-        String username = requestDto.getUsername();
-        String password  = requestDto.getPassword();
-        //사용자 확인
-        User user = userRepository.findByUsername(username).orElseThrow(// 유저네임을 확인한후 있으면 트루를 리턴
-                ()-> new IllegalArgumentException("등록된 사용자가 없습니다.")
-        );
-        //비밀번호 확인
-
-        if (!passwordEncoder.matches(password,user.getPassword())){ //비번이 틀리면 밑에가 실행
-            throw new IllegalArgumentException("비밀번호가 일치 하지 않습니다.");
-        }
-        // 인증 완료 JWT생성 후 쿠키에 저장 후 Response객체에 추가
-        String token = jwtUtil.createToken(user.getUsername(), user.getRole());
-        jwtUtil.addJwtToCookie(token,res);
-    }
 }

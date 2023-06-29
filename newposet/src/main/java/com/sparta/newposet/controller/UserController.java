@@ -25,15 +25,5 @@ public class UserController {
         userService.signup(requestDto);
         return "회원가입이 완료되었습니다.";
     }
-    @PostMapping("/auth/login")
-    public String login(LoginRequestDto requestDto, HttpServletResponse res){
-        try {
-            userService.login(requestDto, res); //로그인검증 끝나면jwt토큰 쿠키에 넣고 그 쿠키 담을것 res에
-        } catch (Exception e) {
-           return "로그인 실패 아이디와 암호를 확인하세요";
-        }
 
-
-        return "로그인 완료";
-    }
 }
