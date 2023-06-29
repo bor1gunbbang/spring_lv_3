@@ -20,12 +20,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/user/signup")
+    @PostMapping("/auth/signup")
     public String signup(SignupRequestDto requestDto){
         userService.signup(requestDto);
         return "회원가입이 완료되었습니다.";
     }
-    @PostMapping("/user/login")
+    @PostMapping("/auth/login")
     public String login(LoginRequestDto requestDto, HttpServletResponse res){
         try {
             userService.login(requestDto, res); //로그인검증 끝나면jwt토큰 쿠키에 넣고 그 쿠키 담을것 res에
